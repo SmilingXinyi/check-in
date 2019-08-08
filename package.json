@@ -1,0 +1,31 @@
+{
+    "name": "check-in",
+    "version": "1.0.0",
+    "description": "check-in application",
+    "main": "index.js",
+    "scripts": {
+        "dev": "next",
+        "build": "next build",
+        "start": "next start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SmilingXinyi/check-in.git"
+    },
+    "author": "Xinyi",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/SmilingXinyi/check-in/issues"
+    },
+    "homepage": "https://github.com/SmilingXinyi/check-in#readme",
+    "dependencies": {
+        "@zeit/next-css": "^1.0.1",
+        "grommet": "^2.7.4",
+        "grommet-icons": "^4.2.0",
+        "next": "^9.0.3",
+        "normalize.css": "^8.0.1",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "styled-components": "^4.3.2"
+    }
+}
