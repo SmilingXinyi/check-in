@@ -6,56 +6,38 @@
 import {Box, ResponsiveContext, Calendar, Button} from 'grommet';
 import {Add} from 'grommet-icons';
 
-const AppBar = props => (
-    <Box
-        tag="header"
-        direction="row"
-        align="end"
-        background="brand"
-        pad={{left: 'medium', right: 'small', vertical: 'small'}}
-        elevation="medium"
-        style={{zIndex: '1'}}
-        {...props}
-    />
-);
-
 export default () => (
     <ResponsiveContext.Consumer>
         {(size)=> (
-            <React.Fragment>
-                <AppBar>
-                    <p>Hi</p>
-                </AppBar>
-                <Box
-                    // fill
-                    direction="column"
+            <Box
+                fill
+                direction="column"
+                background="brand"
+                style={{
+                    position: 'relative'
+                }}
+            >
+                <Box background="primary"
+                     fill
+                     justify="center"
+                     align="center"
+                     style={{
+                         position: 'absolute',
+                         height: '150px',
+                         bottom: 0
+                     }}
                 >
-                    <Box
-                        align="center"
-                        background="light-2"
-                        pad={{
-                            top: 'large',
-                            bottom: 'large'
-                        }}
-                    >
-                        <Calendar
-                            size="medium"
-                            date={(new Date()).toISOString()}
-                            onSelect={(date) => {
-                            }}
-                            locale="zh-CN"
-                        />
-                    </Box>
-                    <Box background="light-4">
-                        <Box overflow="hidden">
-                            <Button primary
-                                    size="medium"
-                                    label="签到"
-                            />
-                        </Box>
+                    <Box width="60px"
+                         height="60px"
+                         round="full"
+                         overflow="hidden"
+                         justify="center"
+                         align="center"
+                         background="normal">
+                        <Button icon={<Add size="30px" color="brand"/>} hoverIndicator onClick={() => {}} />
                     </Box>
                 </Box>
-            </React.Fragment>
+            </Box>
         )}
     </ResponsiveContext.Consumer>
 );

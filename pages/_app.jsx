@@ -1,14 +1,12 @@
 /**
  * @file (_app)
- * Created by baidu on 2019-08-07
+ * Created by Xinyi on 2019-08-07
  */
 
 import React from 'react';
 import App, {Container} from 'next/app';
 import 'normalize.css';
 import {Grommet} from 'grommet';
-import Head from 'next/head';
-
 import theme from '../libs/theme';
 
 export default class extends App {
@@ -31,12 +29,9 @@ export default class extends App {
         const {Component, pageProps} = this.props;
 
         return (
-            <Container>
-                <Head>
-                    <title>My page title</title>
-                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                </Head>
-                <Grommet theme={theme}>
+            <Container fill>
+                <style global jsx>{`html, body {height: 100%;} #__next {height: 100%}`}</style>
+                <Grommet theme={theme} style={{height: '100%'}}>
                     <Component {...pageProps} />
                 </Grommet>
             </Container>

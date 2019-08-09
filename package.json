@@ -29,5 +29,8 @@
         "react-dom": "^16.8.6",
         "styled-components": "^4.3.2"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "terser-webpack-plugin": "^1.4.1"
+    }
 }
