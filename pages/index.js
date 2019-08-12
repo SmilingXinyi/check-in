@@ -3,10 +3,12 @@
  * Created by Xinyi on 2019-08-07
  */
 
+require('dotenv').config();
 import {Box, ResponsiveContext, Calendar, Button} from 'grommet';
-import {Add} from 'grommet-icons';
+import {FingerPrint} from 'grommet-icons';
+import fetch from 'isomorphic-unfetch';
 
-export default () => (
+const Index = props => (
     <ResponsiveContext.Consumer>
         {(size)=> (
             <Box
@@ -34,10 +36,38 @@ export default () => (
                          justify="center"
                          align="center"
                          background="normal">
-                        <Button icon={<Add size="30px" color="brand"/>} hoverIndicator onClick={() => {}} />
+                        <Button icon={<FingerPrint size="30px" color="brand"/>} hoverIndicator onClick={() => {}} />
                     </Box>
                 </Box>
             </Box>
         )}
     </ResponsiveContext.Consumer>
 );
+
+Index.getInitialProps = async function(ctx) {
+    const target = process.env.AUTH;
+    if (!target) {
+        // Todo: redirect
+    }
+
+    const res = await fetch(process.env.AUTH, {
+        headers: {
+            'Cookie': ctx.req.headers.cookie
+        }
+    });
+
+    if (res.status !== 200) {
+        const result = res.text();
+        return {
+            status: result,
+            user: null
+        }
+    }
+
+    return {
+        status: '',
+        user: await res.json()
+    };
+};
+
+export default Index;
