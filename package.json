@@ -21,6 +21,7 @@
     "homepage": "https://github.com/SmilingXinyi/check-in#readme",
     "dependencies": {
         "@zeit/next-css": "^1.0.1",
+        "animate.css": "^3.7.2",
         "dotenv-webpack": "^1.7.0",
         "grommet": "^2.7.4",
         "grommet-icons": "^4.2.0",

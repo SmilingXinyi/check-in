@@ -32,6 +32,7 @@ module.exports = withCSS({
                     }
                 })
             );
+            config.optimization.runtimeChunk = false;
         }
 
         config.plugins = [
