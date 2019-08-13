@@ -3,14 +3,28 @@
  * Created by Xinyi on 2019-08-07
  */
 
-require('dotenv').config();
 import {Box, ResponsiveContext, Calendar, Button} from 'grommet';
 import {FingerPrint} from 'grommet-icons';
 import fetch from 'isomorphic-unfetch';
 
+const Status = {
+    LOADED: 'loaded',
+    LOADING: 'loading',
+    ERROR: 'error',
+    REDIRECT: 'redirect'
+};
+
+/*
+ state:
+    - status
+    - message
+    - history - list
+    - user - user info
+ */
+
 const Index = props => (
     <ResponsiveContext.Consumer>
-        {(size)=> (
+        {(size) => (
             <Box
                 fill
                 direction="column"
@@ -36,18 +50,30 @@ const Index = props => (
                          justify="center"
                          align="center"
                          background="normal">
-                        <Button icon={<FingerPrint size="30px" color="brand"/>} hoverIndicator onClick={() => {}} />
+                        <Button icon={
+                            <FingerPrint
+                                size="30px"
+                                color="brand"/>
+                        }
+                                hoverIndicator
+                                onClick={() => {
+
+                                }}
+                        />
                     </Box>
                 </Box>
             </Box>
         )}
     </ResponsiveContext.Consumer>
-);
+)
 
-Index.getInitialProps = async function(ctx) {
+Index.getInitialProps = async function (ctx) {
     const target = process.env.AUTH;
     if (!target) {
-        // Todo: redirect
+        return {
+            status: Status.ERROR,
+            message: 'Server configuration error!'
+        };
     }
 
     const res = await fetch(process.env.AUTH, {
@@ -56,16 +82,25 @@ Index.getInitialProps = async function(ctx) {
         }
     });
 
+
     if (res.status !== 200) {
-        const result = res.text();
-        return {
-            status: result,
-            user: null
+        if (res.status === 204) {
+            const location = res.headers.get('location')
+            return {
+                status: Status.REDIRECT,
+                message: location
+            }
         }
+
+        const result = await res.text();
+        return {
+            status: Status.REDIRECT,
+            message: result
+        };
     }
 
     return {
-        status: '',
+        status: Status.LOADED,
         user: await res.json()
     };
 };
