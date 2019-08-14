@@ -49,10 +49,12 @@ const Index = props => {
                                    onClickOutside={e => setShowSidebar(false)}
                                    position="left"
                                    margin={{
-                                       right: '50px',
-                                       left: '50px'
+                                       right: '50px'
                                    }}
                                    full
+                                   modal={true}
+                                   responsive={false}
+                                   plain
                             >
                                 <Box flex
                                      width='medium'
